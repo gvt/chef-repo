@@ -1,0 +1,40 @@
+{
+  "name": "netpop-report-server",
+  "description": "A Report Server for Netpop, which is a stand-alone RubyOnRails webapp instance",
+  "chef_type": "role",
+  "override_attributes": {},
+  "json_class": "Chef::Role",
+
+  "default_attributes": {
+    "chef": {
+      "server_url": "https://api.opscode.com/organizations/netpop",
+      "cache_path": "/var/chef/cache",
+      "backup_path": "/var/chef/backup",
+      "validation_client_name": "netpop-validator",
+      "run_path": "/var/chef"
+    }
+  },
+
+  "run_list": [
+    "recipe[getting-started]"
+/*
+    // base
+    "recipe[ubuntu::default]",
+    "recipe[apt::default]",
+    "recipe[build-essential::default]",
+    "recipe[xfs::default]",
+    "recipe[openssl::default]",
+    "recipe[rvm::ree]",
+    "recipe[chef::client]",
+    "recipe[chef::delete_validation]",
+    "recipe[git::default]",
+    "recipe[ec2::default]",
+    // implementation-related
+    "recipe[application::rails_nginx_ree_passenger]",
+    "recipe[postgresql::server]",
+    "recipe[cron::default]",
+    "recipe[memcached::default]",
+    "recipe[capistrano::default]"
+*/
+  ]
+}

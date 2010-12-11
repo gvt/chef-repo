@@ -1,0 +1,72 @@
+{
+  "id": "netpop-report-server",
+  "server_roles": [
+    "netpop-report-server"
+  ],
+  "type": {
+    "netpop-report-server": [
+      "recipes in this application cookbook to run for this role",
+      "rails",
+      "unicorn"
+    ]
+  },
+  "memcached_role": [
+    "netpop-report-server"
+  ],
+  "database_master_role": [
+    "name of the role used by database master, typically named after the app 'my_app_database_master'",
+    "netpop-report-server_database_master"
+  ],
+  "repository": "git@github.com:NetpopJosh/Netpop.git",
+  "revision": {
+    "production": "heroku-production"
+  },
+  "force": {
+    "production": true
+  },
+  "migrate": {
+    "production": true
+  },
+  "databases": {
+    "production": {
+      "reconnect": "true",
+      "encoding": "utf8",
+      "username": "db_user",
+      "adapter": "postgresql",
+      "password": "awesome_password",
+      "database": "db_name_production"
+    }
+  },
+  "mysql_root_password": {
+    "production": "password for the root user in mysql"
+  },
+  "mysql_debian_password": {
+    "production": "password for the debian-sys-maint user on ubuntu/debian"
+  },
+  "mysql_repl_password": {
+    "production": "password for the 'repl' user for replication."
+  },
+  "snapshots_to_keep": {
+    "production": 3
+  },
+  "deploy_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAucB8/BtLsdCB3ugY5C58k9hcWAxG3W1/0xy2S3J/LV5IpDVqhBuCrVGsifcZ3UlXFJQTxp4aQIxXuxjnddEm5fDBj3urzVhEf8or3y8drEkhwpCj8Q3YMWnV7fiWk6hmPLl748ZouhQYKGVbtIaBzGTKGPhh+4yAk+aVVVGB6tRIthUcUhwd2m8dl9xsDXnLPvQKiD7SCQ7YUmQlqHq+UhDWgvkBOBmfn/NuLn1qjDITaoHP0Tb/DxzHdpJKvzSFm5++Ez0wLcNTfyXph0SheINnXagEQnJoq97Wo1UqIi/GcX6OsWoSqzG3aM+0KiLWH+1HLrnkz7Men4j7WCXYzQ== gregtomei@gregt.local",
+  "deploy_to": "/srv/netpop-report-server",
+  "owner": "nobody",
+  "group": "nobody",
+
+  // "packages": {
+  //   "package_name": "specific packages required for installation at the OS level to run the app like libraries and specific version, e.g.",
+  //   "curl": "7.19.5-1ubuntu2"
+  // },
+
+  // "gems": {
+  //   "gem_name": "specific gems required for installation to run the application, and if a specific version is required, e.g.",
+  //   "rails": "2.3.5"
+  // },
+
+  "memcached": {
+    "production": {
+      "namespace": "specify the memcache namespace, ie my_app_environment"
+    }
+  }
+}
