@@ -1,11 +1,24 @@
 {
-  "name": "rvm",
-  "description": "Installs and configures RVM, optionally keeping it updated.",
+  "suggestions": {
+  },
+  "version": "0.0.2",
+  "conflicting": {
+  },
   "long_description": "",
+  "description": "Installs and configures RVM, optionally keeping it updated.",
+  "recipes": {
+    "rvm::ruby_187": "Helper recipe to install ruby 1.8.7",
+    "rvm::ree": "Helper recipe to install ruby enterprise edition",
+    "rvm::ruby_192": "Helper recipe to install ruby 1.9.2",
+    "rvm::install": "Install a ruby implementation based on attributes",
+    "rvm": "Install system-wide RVM"
+  },
+  "providing": {
+  },
+  "attributes": {
+  },
   "maintainer": "James Harton, Sociable Limited.",
-  "maintainer_email": "james@sociable.co.nz",
-  "license": "MIT",
-  "platforms": {
+  "replacing": {
   },
   "dependencies": {
     "apt": [
@@ -15,26 +28,13 @@
 
     ]
   },
-  "recommendations": {
+  "platforms": {
   },
-  "suggestions": {
-  },
-  "conflicting": {
-  },
-  "providing": {
-  },
-  "replacing": {
-  },
-  "attributes": {
-  },
+  "maintainer_email": "james@sociable.co.nz",
   "groupings": {
   },
-  "recipes": {
-    "rvm": "Install system-wide RVM",
-    "rvm::install": "Install a ruby implementation based on attributes",
-    "rvm::ruby_192": "Helper recipe to install ruby 1.9.2",
-    "rvm::ruby_187": "Helper recipe to install ruby 1.8.7",
-    "rvm::ree": "Helper recipe to install ruby enterprise edition"
+  "name": "rvm",
+  "recommendations": {
   },
-  "version": "0.0.2"
+  "license": "MIT"
 }

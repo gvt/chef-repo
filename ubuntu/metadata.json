@@ -1,42 +1,35 @@
 {
-  "license": "Apache 2.0",
-  "recipes": {
-    "ubuntu": ""
+  "suggestions": {
   },
+  "version": "0.7.0",
   "conflicting": {
-
+  },
+  "long_description": "",
+  "description": "Sets up sources for ubuntu",
+  "recipes": {
+  },
+  "providing": {
+  },
+  "attributes": {
+  },
+  "maintainer": "Opscode, Inc.",
+  "replacing": {
   },
   "dependencies": {
     "apt": [
 
     ]
   },
-  "providing": {
-    "ubuntu": [
-
-    ]
-  },
-  "long_description": "",
-  "description": "Sets up sources for ubuntu",
-  "replacing": {
-
-  },
   "platforms": {
     "ubuntu": [
 
     ]
   },
-  "version": "0.7.0",
-  "maintainer": "Opscode, Inc.",
-  "recommendations": {
-
+  "maintainer_email": "cookbooks@opscode.com",
+  "groupings": {
   },
   "name": "ubuntu",
-  "maintainer_email": "cookbooks@opscode.com",
-  "attributes": {
-
+  "recommendations": {
   },
-  "suggestions": {
-
-  }
+  "license": "Apache 2.0"
 }
