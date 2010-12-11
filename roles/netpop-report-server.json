@@ -16,8 +16,6 @@
   },
 
   "run_list": [
-    "recipe[getting-started]"
-/*
     // base
     "recipe[ubuntu::default]",
     "recipe[apt::default]",
@@ -35,6 +33,5 @@
     "recipe[cron::default]",
     "recipe[memcached::default]",
     "recipe[capistrano::default]"
-*/
   ]
 }
