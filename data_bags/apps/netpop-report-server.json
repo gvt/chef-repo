@@ -5,7 +5,6 @@
   ],
   "type": {
     "netpop-report-server": [
-      "recipes in this application cookbook to run for this role",
       "rails",
       "unicorn"
     ]

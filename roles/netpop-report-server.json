@@ -28,7 +28,7 @@
     "recipe[git::default]",
     "recipe[ec2::default]",
     // implementation-related
-    "recipe[application::rails_nginx_ree_passenger]",
+    "recipe[application::unicorn]",
     "recipe[postgresql::server]",
     "recipe[cron::default]",
     "recipe[memcached::default]",
