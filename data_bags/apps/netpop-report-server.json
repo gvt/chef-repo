@@ -64,7 +64,7 @@
   ],
   "memcached": {
     "production": {
-      "namespace": "netpop-report-server_environment"
+      "namespace": "netpop-report-server_production"
     }
   }
 }

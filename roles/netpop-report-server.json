@@ -17,8 +17,7 @@
 
   "run_list": [
     // base
-    // "recipe[apt::default]", // included by the ubuntu::default recipe? http://likens.us/logs/%23chef.10-21.log
-    "recipe[ubuntu::default]",
+    "recipe[ubuntu::default]", // includes the recipe for apt
     "recipe[build-essential::default]",
     "recipe[xfs::default]",
     "recipe[openssl::default]",
