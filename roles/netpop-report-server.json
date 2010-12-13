@@ -23,7 +23,6 @@
     "recipe[openssl::default]",
     "recipe[rvm::ree]",
     "recipe[chef::client]",
-    "recipe[chef::delete_validation]",
     "recipe[git::default]",
     "recipe[ec2::default]",
     // implementation-related
