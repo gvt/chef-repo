@@ -1,7 +1,9 @@
 {
   "id": "netpop-report-server",
   "server_roles": [
-    "netpop-report-server"
+    "production",
+    "netpop-report-server",
+    "netpop-report-server_database_master"
   ],
   "type": {
     "netpop-report-server": [
