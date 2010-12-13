@@ -65,6 +65,7 @@
   "memcached": {
     "production": {
       "namespace": "netpop-report-server_production"
-    }
+    },
+    "port": 11211
   }
 }
