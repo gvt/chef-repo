@@ -28,7 +28,7 @@
     "recipe[git::default]",
     "recipe[ec2::default]",
     // implementation-related
-    "recipe[application::unicorn]",
+    "recipe[application::default]",
     "recipe[postgresql::server]",
     "recipe[cron::default]",
     "recipe[memcached::default]",
