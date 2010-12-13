@@ -1,9 +1,7 @@
 {
   "id": "netpop-report-server",
   "server_roles": [
-    "production",
-    "netpop-report-server",
-    "netpop-report-server_database_master"
+    "netpop-report-server"
   ],
   "type": {
     "netpop-report-server": [
@@ -11,16 +9,12 @@
       "unicorn"
     ]
   },
-  "memcached_role": [
-    "netpop-report-server"
-  ],
   "database_master_role": [
-    "name of the role used by database master, typically named after the app 'my_app_database_master'",
     "netpop-report-server_database_master"
   ],
   "repository": "git@github.com:NetpopJosh/Netpop.git",
   "revision": {
-    "production": "heroku-production"
+    "production": "master"
   },
   "force": {
     "production": true
@@ -65,9 +59,12 @@
   //   "rails": "2.3.5"
   // },
 
+  "memcached_role": [
+    "netpop-report-server"
+  ],
   "memcached": {
     "production": {
-      "namespace": "specify the memcache namespace, ie my_app_environment"
+      "namespace": "netpop-report-server_environment"
     }
   }
 }
