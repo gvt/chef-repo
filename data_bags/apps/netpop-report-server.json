@@ -44,7 +44,7 @@
   "snapshots_to_keep": {
     "production": 3
   },
-  "deploy_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAucB8/BtLsdCB3ugY5C58k9hcWAxG3W1/0xy2S3J/LV5IpDVqhBuCrVGsifcZ3UlXFJQTxp4aQIxXuxjnddEm5fDBj3urzVhEf8or3y8drEkhwpCj8Q3YMWnV7fiWk6hmPLl748ZouhQYKGVbtIaBzGTKGPhh+4yAk+aVVVGB6tRIthUcUhwd2m8dl9xsDXnLPvQKiD7SCQ7YUmQlqHq+UhDWgvkBOBmfn/NuLn1qjDITaoHP0Tb/DxzHdpJKvzSFm5++Ez0wLcNTfyXph0SheINnXagEQnJoq97Wo1UqIi/GcX6OsWoSqzG3aM+0KiLWH+1HLrnkz7Men4j7WCXYzQ== gregtomei@gregt.local",
+  "deploy_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAucB8/BtLsdCB3ugY5C58k9hcWAxG3W1/0xy2S3J/LV5IpDVqhBuCrVGsifcZ3UlXFJQTxp4aQIxXuxjnddEm5fDBj3urzVhEf8or3y8drEkhwpCj8Q3YMWnV7fiWk6hmPLl748ZouhQYKGVbtIaBzGTKGPhh+4yAk+aVVVGB6tRIthUcUhwd2m8dl9xsDXnLPvQKiD7SCQ7YUmQlqHq+UhDWgvkBOBmfn/NuLn1qjDITaoHP0Tb/DxzHdpJKvzSFm5++Ez0wLcNTfyXph0SheINnXagEQnJoq97Wo1UqIi/GcX6OsWoSqzG3aM+0KiLWH+1HLrnkz7Men4j7WCXYzQ==",
   "deploy_to": "/srv/netpop-report-server",
   "owner": "ubuntu",
   "group": "ubuntu",
