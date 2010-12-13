@@ -9,9 +9,9 @@
       "unicorn"
     ]
   },
-  "database_master_role": [
-    "netpop-report-server_database_master"
-  ],
+  // "database_master_role": [
+  //   "netpop-report-server_database_master"
+  // ],
   "repository": "git@github.com:NetpopJosh/Netpop.git",
   "revision": {
     "production": "master"
@@ -38,9 +38,9 @@
   "mysql_debian_password": {
     "production": "password for the debian-sys-maint user on ubuntu/debian"
   },
-  "mysql_repl_password": {
-    "production": "password for the 'repl' user for replication."
-  },
+  // "mysql_repl_password": {
+  //   "production": "password for the 'repl' user for replication."
+  // },
   "snapshots_to_keep": {
     "production": 3
   },
