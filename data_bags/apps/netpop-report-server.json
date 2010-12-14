@@ -44,7 +44,7 @@
   "snapshots_to_keep": {
     "production": 3
   },
-  "deploy_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAucB8/BtLsdCB3ugY5C58k9hcWAxG3W1/0xy2S3J/LV5IpDVqhBuCrVGsifcZ3UlXFJQTxp4aQIxXuxjnddEm5fDBj3urzVhEf8or3y8drEkhwpCj8Q3YMWnV7fiWk6hmPLl748ZouhQYKGVbtIaBzGTKGPhh+4yAk+aVVVGB6tRIthUcUhwd2m8dl9xsDXnLPvQKiD7SCQ7YUmQlqHq+UhDWgvkBOBmfn/NuLn1qjDITaoHP0Tb/DxzHdpJKvzSFm5++Ez0wLcNTfyXph0SheINnXagEQnJoq97Wo1UqIi/GcX6OsWoSqzG3aM+0KiLWH+1HLrnkz7Men4j7WCXYzQ==",
+  "deploy_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEoAIBAAKCAQEAmTf0ONJYz8LUlgYw4Mws4vi0EQoI4tc+Xuv1R2nPQ3EUlWt1\ng85mk7P5TKJExgHzhzVv0wWc2HF4FYiYOdvLvxoY1LMGQeT9trX1J32hRMOGW67u\nAlfYIsMlqxJy294qrlReZ0irH458BaVAReepMGTk7zynAoUIhEjajeDfgQADQZHh\nAB5tdmq0hLib3AWew+VjXjQqzcvYTp+uZz0jjaDAn3upKil7SwAbPmIdPhc1oAEz\nLXBfwl0PcPzoay6uHSySPsvzv5c6zcDcAlFkoagym2XnordJoZha95a2YIs4Jt2h\n1xvvk6opj/5eGOHOsJefjsL+PgDTPeLtzaQn7QIBIwKCAQBOzFG20pQTE73Jf4ba\nApq93v2FGxqDSiATj0rxht+fBvSknaomh2f0MKwYyHskAQDmc0DS7PGT4pWHatHx\n3sCOKq2vN3+PmlaYetXZy5TER0xpqmvGsNWOOHnFsbdpwrbdT/YJO1CxJLTPtBJt\nGA3eX8Yx5K2phj7k8kSDevaaHHe+lqr8Qgndoe2avSr1Ejc3qZsLEWc5BnFX6C2g\nMCWrnt3Dnb1/4pPSXUmLuFfTLI67JS+E7Zxu27CeGq2h6pRS87bZcs4l4E4FiJVC\nAhxZlAQv/juspOAPH0NkLrepAKA64nuHEKSUrHKolvDqwwFChRbnxW2/ccjgXjKC\n5nVLAoGBAMp5U5kBiTR4PhZKqXWwCA2ussw0au9mvdwNjNiXtxaR7tlOM1nXz6uO\nfOUw+Fof+q28VIS+MtPLHJW9MMC0NjoSj8mS7juC3LNF0TZvBDqjTdjJDeL4iWTZ\n9TX14teil3eJ63ow/5gCjPBd9XFTW/0ic1LPlrT+X7wCt/bu9v+pAoGBAMG5NcKi\nTbQIHGypn1Kky+zTobDNJ2R4LB/dQSfCtqdKbsZU6u0SkwWjeHxhSm2uKXJbVide\ni/g8I4XVtLmmzMVpUR4FDLWdv0Un19ivZYEXSMN1Bh7ae4ZxWCH3ys71VhdG5HBY\nX4lTlQTqOML9CqRwWmdR1xBLYEmG5ZSnQmClAoGAbeoXcFFKe5G7Te4EOJLCixWx\nhMv/iUZnEQ6ri4WPRsQ/1Q0x0a+rP9+i4tFw4HfCmNPzXgDZw25Ct6/YoyAALidV\nXswa7RsnWgFUUL/sWlimmkFCDX+bCty4UH4qr5LHQOR4hCk6SzSVpw5vTCXwG7Od\nsJyTpBUPZhAauT/lK7MCgYB/TdLe/PE7ytDZsUtw0rHkxZYjugPxkMyJ98u7Cu0O\n2SQ5MH0fcpsg9mUeiROnKU5vuF0v0Gqbz7+Sdn4TmX8/5h9c3r81hOtn9Zx4c0Kz\n6rrJlgtWGouwHpkAYQGd8a2aRId9Bt+yA7myxc2HcxWfQoSNCeUZVhqz+Y+NknwT\nnwKBgDvTPVveU4G0BX0uUAQPe9jr/Kby4kp8KQGi71i6Be7pwwgogrIov/A7gM8j\ny0rnr22uClq0jj/eScbYPTGXTOekUKUSTEpxFHuw/3eRHekd6TnHlsDgJC3tli9I\nZzPGv41nc64Rn/ll8tlbIgkWVVqnnV0AnhR9lP0NjsB8RxIu\n-----END RSA PRIVATE KEY-----\n",
   "deploy_to": "/srv/netpop-report-server",
   "owner": "ubuntu",
   "group": "ubuntu",
@@ -54,10 +54,21 @@
   //   "curl": "7.19.5-1ubuntu2"
   // },
 
-  // "gems": {
-  //   "gem_name": "specific gems required for installation to run the application, and if a specific version is required, e.g.",
-  //   "rails": "2.3.5"
-  // },
+  "gems": {
+    "rails": "2.3.4",
+    "pg": "0.9.0",
+    "authlogic": "2.1.3",
+    "is_paranoid": "0.9.6",
+    "factory_girl": "1.2.3",
+    "memcached": "0.19.2",
+    "friendly_id": "2.2.7",
+    "validates_email_format_of": "1.4.1",
+    "oauth": "0.3.6",
+    "wolframarnold-google-spreadsheet-ruby": "0.1.3",
+    "paperclip": "2.3.1",
+    "aws-s3": "0.6.2",
+    "fastercsv": "1.5.3"
+  },
 
   "memcached_role": [
     "netpop-report-server"

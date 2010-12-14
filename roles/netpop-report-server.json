@@ -26,8 +26,8 @@
     "recipe[git::default]",
     "recipe[ec2::default]",
     // implementation-related
+    "recipe[postgresql::server]", // this needs to be installed so that its libs can be comiled again in the application recipe
     "recipe[application::default]",
-    "recipe[postgresql::server]",
     "recipe[cron::default]",
     "recipe[memcached::default]",
     "recipe[capistrano::default]"
