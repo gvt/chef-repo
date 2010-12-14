@@ -1,51 +1,139 @@
 {
-  "name": "postgresql",
-  "description": "Installs and configures postgresql for clients or servers",
-  "long_description": "= DESCRIPTION:\n\nInstalls and configures postgresql client or server.\n\n= REQUIREMENTS:\n\n== Platform:\n\nTested on CentOS 5.5, Ubuntu 10.04 but should support centos, redhat, fedora, suse, ubuntu and debian.\n\n== Cookbooks:\n\n= ATTRIBUTES: \n\n* postgresql[:dir] - configuration file location.\n* postgresql[:version] - Version of postgresql to use. Configured in attributes based on platform.\n* postgresql[:ssl] - used on debian family installs to enable ssl support. The debian post installation script automatically builds the certificates.\n\n= USAGE:\n\nFor clients:\n\n  include_recipe \"postgresql::client\"\n  \nFor server: \n\n  include_recipe \"postgresql::server\"\n  \n(client is already included by server). This will check the platform that the node is and include either redhat family recipe (postgresql::server_redhat) or debian family (postgresql::server_debian) because the two styles differ quite a bit.\n\nThe templates provided by this cookbook will probably need to be tweaked for the local environment, no tuning parameters are specified in them. The templates are separated by family designation in the template directory, since Chef doesn't do \"platform family\" style file specificity.\n\n= LICENSE and AUTHOR:\n      \nAuthor:: Joshua Timberman (<joshua@opscode.com>)\n\nCopyright:: 2009-2010, Opscode, Inc\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+  "suggestions": {
+  },
+  "version": "0.11.1",
+  "conflicting": {
+  },
+  "long_description": "= DESCRIPTION:\n\nInstalls and configures the PostgreSQL client or server.\n\n= REQUIREMENTS:\n\n== Platform:\n\nTested on CentOS 5.5, Ubuntu 10.04 and Debian Lenny but should also support Red Hat, Fedora and SUSE.\n\n== Cookbooks:\n\n= ATTRIBUTES: \n\n* postgresql[:listen] - IP address to listen on.\n* postgrseql[:port] - Port number to use.\n* postgresql[:dir] - Configuration files location.\n* postgresql[:contrib_dir] - \"contrib\" scripts location. Read-only, determined by platform.\n* postgresql[:version] - Version of PostgreSQL to use. Read-only, determined by platform.\n* postgresql[:ssl] - Enable SSL support? The Debian post installation script automatically builds the certificates.\n\n= USAGE:\n\nFor clients:\n\n  include_recipe \"postgresql::client\"\n  \nFor servers:\n\n  include_recipe \"postgresql::server\"\n  \nThe server recipe includes the client recipe and either the Red Hat family (postgresql::server_redhat) or Debian family (postgresql::server_debian) recipe. These platform styles differ quite a bit.\n\nThe templates provided by this cookbook will probably need to be tweaked for the local environment as no tuning parameters are specified in them. The templates are separated by family designation in the template directory, since Chef doesn't do \"platform family\" style file specificity.\n\nA postgresql_user definition is provided for creating users. Supported actions are :create and :drop. The openssl cookbook can be used to randomly generate a secure password.\n\n  postgresql_user \"fred\" do\n    password \"foobar\"\n    privileges :superuser => false, :createdb => false, :inherit => true, :login => true\n  end\n\nA postgresql_database definition is provided for creating databases. Supported actions are :create and :drop. Additional modules from the \"contrib\" directory can be given in an array. Include \"postgis\" in this array to enable PostGIS, which is handled as a special case.\n\n  postgresql_database \"foobar\" do\n    owner \"fred\"\n    template \"barbaz\"\n    flags :datconnlimit => 5\n    languages [ \"plpgsql\" ]\n    modules [ \"citext\", \"postgis\" ]\n  end\n\n= LICENSE and AUTHOR:\n      \nAuthor:: Joshua Timberman (<joshua@opscode.com>), James Le Cuirot (<developers@findsyou.com>)\n\nCopyright:: 2009-2010, Opscode, Inc; 2010, FindsYou Limited\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+  "description": "Installs and configures PostgreSQL for clients or servers",
+  "recipes": {
+    "postgresql::server_server": "Installs PostgreSQL server packages, Debian family style",
+    "postgresql::server": "Installs PostgreSQL server packages, templates",
+    "postgresql::client": "Installs PostgreSQL client package(s)",
+    "postgresql::postgis": "Installs PostGIS package(s)",
+    "postgresql::server_redhat": "Installs PostgreSQL server packages, Red Hat family style",
+    "postgresql": "Empty, use one of the other recipes"
+  },
+  "providing": {
+  },
+  "attributes": {
+    "postgresql/contrib_dir": {
+      "required": "optional",
+      "calculated": true,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+
+      ],
+      "display_name": "PostgreSQL contrib directory",
+      "description": "The location of PostgreSQL's contrib scripts. Read-only, determined by platform."
+    },
+    "postgresql/listen": {
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "default": "localhost",
+      "type": "string",
+      "recipes": [
+        "server_debian",
+        "server_redhat"
+      ],
+      "display_name": "PostgreSQL listen address",
+      "description": "The IP address for PostgreSQL to listen on."
+    },
+    "postgresql/dir": {
+      "required": "optional",
+      "calculated": true,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "server_debian",
+        "server_redhat"
+      ],
+      "display_name": "PostgreSQL configuration directory",
+      "description": "The location of PostgreSQL's configuration files."
+    },
+    "postgresql/ssl": {
+      "required": "optional",
+      "calculated": true,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+
+      ],
+      "display_name": "PostgreSQL SSL support",
+      "description": "Enable SSL support for PostgreSQL? This is false by default, except on Debian family platforms for 8.4 and above."
+    },
+    "postgresql/port": {
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "default": "5432",
+      "type": "string",
+      "recipes": [
+        "server_debian",
+        "server_redhat"
+      ],
+      "display_name": "PostgreSQL port number",
+      "description": "The port number for PostgreSQL to use."
+    },
+    "postgresql/version": {
+      "required": "optional",
+      "calculated": true,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "server_debian",
+        "server_redhat",
+        "client",
+        "postgis"
+      ],
+      "display_name": "PostgreSQL version",
+      "description": "The version of PostgreSQL to use. Read-only, determined by platform."
+    }
+  },
   "maintainer": "Opscode, Inc.",
-  "maintainer_email": "cookbooks@opscode.com",
-  "license": "Apache 2.0",
+  "replacing": {
+  },
+  "dependencies": {
+  },
   "platforms": {
     "rhel": [
-
-    ],
-    "centos": [
-
-    ],
-    "fedora": [
-
-    ],
-    "ubuntu": [
 
     ],
     "debian": [
 
     ],
+    "fedora": [
+
+    ],
+    "centos": [
+
+    ],
     "suse": [
+
+    ],
+    "ubuntu": [
 
     ]
   },
-  "dependencies": {
-  },
-  "recommendations": {
-  },
-  "suggestions": {
-  },
-  "conflicting": {
-  },
-  "providing": {
-  },
-  "replacing": {
-  },
-  "attributes": {
-  },
+  "maintainer_email": "cookbooks@opscode.com",
   "groupings": {
   },
-  "recipes": {
-    "postgresql": "Empty, use one of the other recipes",
-    "postgresql::client": "Installs postgresql client package(s)",
-    "postgresql::server": "Installs postgresql server packages, debian family style",
-    "postgresql::redhat": "Installs postgresql server packages, redhat family style"
+  "name": "postgresql",
+  "recommendations": {
   },
-  "version": "0.11.1"
+  "license": "Apache 2.0"
 }
