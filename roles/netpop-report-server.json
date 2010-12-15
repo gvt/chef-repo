@@ -28,11 +28,11 @@
     // implementation-related
     "recipe[postgresql::server]",
     "recipe[postgresql::client]", // need this installed to comile against its libs by "application" recipe
-    "recipe[application::default]",
     "recipe[cron::default]",
     "recipe[postfix::default]",
     "recipe[postfix::sasl_auth]", // need this installed to satify SASL dependency of memcached
     "recipe[memcached::default]",
+    "recipe[application::default]", // this needs to be near the end so that its many dependencies are satisfied
     "recipe[capistrano::default]"
   ]
 }
