@@ -21,7 +21,6 @@
     "recipe[build-essential::default]",
     "recipe[xfs::default]",
     "recipe[openssl::default]",
-    "recipe[rvm::ree]",
     "recipe[chef::client]",
     "recipe[git::default]",
     "recipe[ec2::default]",

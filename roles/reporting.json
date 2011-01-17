@@ -1,0 +1,12 @@
+{
+  "name": "reporting",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "app_environment": "reporting"
+  },
+  "description": "reporting environment role",
+  "run_list": [],
+  "override_attributes": {
+  }
+}
