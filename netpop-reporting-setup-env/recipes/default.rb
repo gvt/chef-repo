@@ -16,11 +16,15 @@
 deploy_to = "/srv/netpop-reporting"
 
 bash "create group for apps" do
-  code "addgroup apps"
+  new_group = "apps"
+  code "addgroup #{new_group}"
+  not_if "test -z `grep #{new_group} /etc/group`" # only if not already exists
 end
 
 bash "create user account for reporting" do
-  code "adduser --ingroup apps reporting"
+  new_user = "reporting"
+  code "adduser --ingroup apps #{new_user}"
+  not_if "test -z `grep #{new_user} /etc/passwd`" # only if not already exists
 end
 
 directory deploy_to do
