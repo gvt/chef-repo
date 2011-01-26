@@ -24,7 +24,7 @@ bash "create user account for reporting" do
 end
 
 directory deploy_to do
-  user      "reporting"
+  owner     "reporting"
   group     "apps"
   mode      0775
 end
