@@ -10,26 +10,26 @@
 ##
 # what it does:
 #   1) set directory permissions to allow for capistrano deployment
-#   2) install server software needed by the app (monit, DJ, etc)
+#   2) install server software needed by the app (just monit for now)
 ##
 
-deploy_to = "/srv/netpop-reporting"
+deploy_to       = "/srv/netpop-reporting"
+reporting_user  = "reporting"
+reporting_group = "apps"
 
 bash "create group for apps" do
-  new_group = "apps"
-  code "addgroup #{new_group}"
-  not_if "test -n `grep #{new_group} /etc/group`" # not if group already exists
+  code "addgroup #{reporting_group}"
+  only_if "test 0 -eq `grep -c #{reporting_group} /etc/group`" # only_if does NOT exist
 end
 
 bash "create user account for reporting" do
-  new_user = "reporting"
-  code "adduser --ingroup apps #{new_user}"
-  not_if "test -n `grep #{new_user} /etc/passwd`" # not if user account already exists
+  code "adduser --ingroup apps #{reporting_user}"
+  only_if "test 0 -eq `grep -c #{reporting_user} /etc/passwd`" # only_if does NOT exist
 end
 
 directory deploy_to do
-  owner     "reporting"
-  group     "apps"
+  owner     reporting_user
+  group     reporting_group
   mode      0775
 end
 
