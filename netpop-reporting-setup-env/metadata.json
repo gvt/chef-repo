@@ -1,0 +1,29 @@
+{
+  "suggestions": {
+  },
+  "version": "0.0.1",
+  "conflicting": {
+  },
+  "long_description": "= DESCRIPTION:\nwhat it does:\n1) set directory permissions to allow for capistrano deployment\n2) install server software needed by the app (for now just monit)\n\n= REQUIREMENTS:\nadduser, addgroup\n\n\n= ATTRIBUTES:\ndeploy_to: file path of deployment location\n\n= USAGE:\n",
+  "description": "Installs/Configures netpop-reporting-setup-env",
+  "recipes": {
+  },
+  "providing": {
+  },
+  "attributes": {
+  },
+  "maintainer": "Gregory Tomei",
+  "replacing": {
+  },
+  "dependencies": {
+  },
+  "platforms": {
+  },
+  "maintainer_email": "gregory@websystemstudio.com",
+  "groupings": {
+  },
+  "name": "netpop-reporting-setup-env",
+  "recommendations": {
+  },
+  "license": "All rights reserved"
+}
