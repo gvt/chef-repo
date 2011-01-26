@@ -20,7 +20,7 @@ bash "create group for apps" do
 end
 
 bash "create user account for reporting" do
-  code "adduser --in-group apps reporting"
+  code "adduser --ingroup apps reporting"
 end
 
 directory deploy_to do
