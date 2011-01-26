@@ -31,6 +31,7 @@ directory deploy_to do
   owner     reporting_user
   group     reporting_group
   mode      0775
+  recursive true
 end
 
 include_recipe "monit"
