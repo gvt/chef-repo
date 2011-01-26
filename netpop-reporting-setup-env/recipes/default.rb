@@ -28,10 +28,11 @@ bash "create user account for reporting" do
 end
 
 directory deploy_to do
+  action    :create
+  recursive true
   owner     reporting_user
   group     reporting_group
   mode      0775
-  recursive true
 end
 
 include_recipe "monit"
