@@ -1,0 +1,13 @@
+= DESCRIPTION:
+what it does:
+1) set directory permissions to allow for capistrano deployment
+2) install server software needed by the app (for now just monit)
+
+= REQUIREMENTS:
+adduser, addgroup
+
+
+= ATTRIBUTES:
+deploy_to: file path of deployment location
+
+= USAGE:
