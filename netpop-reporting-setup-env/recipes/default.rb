@@ -42,6 +42,7 @@ cookbook_file "/home/#{reporting_user}/.ssh/id_rsa" do
   action    :create
   owner     reporting_user
   mode      "700" # must be highly restricted perms or SSH agent will not use it
+  not_if    "test -f /home/#{reporting_user}/.ssh/id_rsa" # not_if file exists
 end
 
 gem_package 'rake'
