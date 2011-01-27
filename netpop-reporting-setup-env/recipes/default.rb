@@ -35,12 +35,13 @@ directory deploy_to do
   mode      "775" # When specifying the mode, the value can be a quoted string, eg "644". For a numeric value, it should be 5 digits, eg "00644" to ensure that Ruby can parse it correctly
 end
 
+##
+# put the SSH key for github in place. depends on existance of the user's ~/.ssh folder
 cookbook_file "/home/#{reporting_user}/.ssh/id_rsa_github" do
+  source    "id_rsa_github"
   action    :create
-  recursive true
   owner     reporting_user
   mode      "700" # must be highly restricted perms or SSH agent will not use it
-  source    "files/id_rsa_github"
 end
 
 include_recipe "monit"
