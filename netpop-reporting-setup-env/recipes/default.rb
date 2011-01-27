@@ -44,4 +44,6 @@ cookbook_file "/home/#{reporting_user}/.ssh/id_rsa" do
   mode      "700" # must be highly restricted perms or SSH agent will not use it
 end
 
+gem_package 'rake'
+
 include_recipe "monit"
