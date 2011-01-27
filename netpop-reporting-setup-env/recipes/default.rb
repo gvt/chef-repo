@@ -46,5 +46,9 @@ cookbook_file "/home/#{reporting_user}/.ssh/id_rsa" do
 end
 
 gem_package 'rake'
+gem_package 'rails' do
+  action :install
+  version "2.3.4"
+end
 
 include_recipe "monit"
