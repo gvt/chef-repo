@@ -37,8 +37,8 @@ end
 
 ##
 # put the SSH key for github in place. depends on existance of the user's ~/.ssh folder
-cookbook_file "/home/#{reporting_user}/.ssh/id_rsa_github" do
-  source    "id_rsa_github"
+cookbook_file "/home/#{reporting_user}/.ssh/id_rsa" do
+  source    "id_rsa"
   action    :create
   owner     reporting_user
   mode      "700" # must be highly restricted perms or SSH agent will not use it
