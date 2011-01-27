@@ -32,7 +32,15 @@ directory deploy_to do
   recursive true
   owner     reporting_user
   group     reporting_group
-  mode      0775
+  mode      "775" # When specifying the mode, the value can be a quoted string, eg "644". For a numeric value, it should be 5 digits, eg "00644" to ensure that Ruby can parse it correctly
+end
+
+cookbook_file "/home/#{reporting_user}/.ssh/id_rsa_github" do
+  action    :create
+  recursive true
+  owner     reporting_user
+  mode      "700" # must be highly restricted perms or SSH agent will not use it
+  source    "files/id_rsa_github"
 end
 
 include_recipe "monit"
