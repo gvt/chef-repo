@@ -31,5 +31,12 @@
     "recipe[monit::default]",
     "recipe[netpop-reporting-setup-env::default]",
     "recipe[capistrano::default]"
-  ]
+  ],
+
+  "authorization": {
+    "sudo": {
+      "users": ["reporting"]
+      // "groups": [], // no groups right now. uncomment if needed.
+    }
+  }
 }
