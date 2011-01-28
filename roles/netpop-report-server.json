@@ -22,6 +22,7 @@
     "recipe[xfs::default]",
     "recipe[openssl::default]",
     "recipe[chef::client]",
+    "recipe[sudo::default]",
     // implementation-related
     "recipe[git::default]",
     "recipe[postgresql::server]",
