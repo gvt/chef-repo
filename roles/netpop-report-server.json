@@ -35,7 +35,7 @@
 
   "authorization": {
     "sudo": {
-      "users": ["reporting"]
+      "users": ["ubuntu", "reporting"]
       // "groups": [], // no groups right now. uncomment if needed.
     }
   }
