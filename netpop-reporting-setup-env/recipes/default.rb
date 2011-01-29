@@ -16,6 +16,7 @@
 deploy_to       = "/srv/netpop-reporting"
 reporting_user  = "reporting"
 reporting_group = "apps"
+user_ssh_dir    = "/home/#{reporting_user}/.ssh"
 
 bash "create group for apps" do
   code "addgroup #{reporting_group}"
@@ -35,9 +36,16 @@ directory deploy_to do
   mode      "775" # When specifying the mode, the value can be a quoted string, eg "644". For a numeric value, it should be 5 digits, eg "00644" to ensure that Ruby can parse it correctly
 end
 
+# creates user's SSH dir at ~/.ssh
+directory user_ssh_dir do
+  action    :create
+  recursive true
+  owner     reporting_user
+end
+
 ##
-# put the SSH key for github in place. depends on existance of the user's ~/.ssh folder
-cookbook_file "/home/#{reporting_user}/.ssh/id_rsa" do
+# put the SSH key for github in place. depends on existance of user_ssh_dir
+cookbook_file "#{user_ssh_dir}/id_rsa" do
   source    "id_rsa"
   action    :create
   recursive true
