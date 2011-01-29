@@ -4,10 +4,15 @@ what it does:
 2) install server software needed by the app (for now just monit)
 
 = REQUIREMENTS:
-adduser, addgroup
-
+system group "admin"
+creates system user "reporting"
+user "reporting" will have ~/.ssh folder created
 
 = ATTRIBUTES:
 deploy_to: file path of deployment location
+
+= FILES:
+default/id_rsa: used to allow outbound SSH connections to GitHub.com, for deployment via `git clone ...`
+default/id.ec2-netpop-sysadmin.rsa: used to allow inbound SSH connections; same key that the server is built with.
 
 = USAGE:

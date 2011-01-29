@@ -52,6 +52,15 @@ cookbook_file "#{user_ssh_dir}/id_rsa" do
   not_if    "test -f /home/#{reporting_user}/.ssh/id_rsa" # not_if file exists
 end
 
+##
+# copy an authorized_keys file for this user, taken from ubuntu user's, because ubuntu user has the EC2 group key already
+cookbook_file "#{user_ssh_dir}/authorized_keys" do
+  source    "authorized_keys"
+  action    :create
+  owner     reporting_user
+  mode      "600" # must be highly restricted perms or SSH agent will not use it
+end
+
 gem_package 'rake'
 gem_package 'rails' do
   action :install
