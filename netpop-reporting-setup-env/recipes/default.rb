@@ -40,6 +40,7 @@ end
 cookbook_file "/home/#{reporting_user}/.ssh/id_rsa" do
   source    "id_rsa"
   action    :create
+  recursive true
   owner     reporting_user
   mode      "700" # must be highly restricted perms or SSH agent will not use it
   not_if    "test -f /home/#{reporting_user}/.ssh/id_rsa" # not_if file exists
