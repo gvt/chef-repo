@@ -97,3 +97,11 @@ cookbook_file "#{user_heroku}/credentials" do
   owner     reporting_user
   mode      "644" # readable by others
 end
+
+postgresql_user reporting_user do
+  action     :create
+  password   "c0rtland"
+  privileges :superuser => false, :createdb => true, :inherit => true, :login => true
+end
+
+# TODO: the reporting app will need to run under the reporting user account to get access to logs, heroku creds, etc
