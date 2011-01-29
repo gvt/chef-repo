@@ -95,5 +95,5 @@ cookbook_file "#{user_heroku}/credentials" do
   source    "heroku-credentials"
   action    :create
   owner     reporting_user
-  mode      "744" # readable by others
+  mode      "644" # readable by others
 end
