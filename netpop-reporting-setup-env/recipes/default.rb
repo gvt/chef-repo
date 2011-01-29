@@ -86,7 +86,7 @@ directory user_heroku do
   action    :create
   recursive true
   owner     reporting_user
-  mode      "755" # readable by others
+  mode      "755" # readable and cd-able by others
 end
 
 ##
@@ -95,5 +95,5 @@ cookbook_file "#{user_heroku}/credentials" do
   source    "heroku-credentials"
   action    :create
   owner     reporting_user
-  mode      "755" # readable by others
+  mode      "744" # readable by others
 end
