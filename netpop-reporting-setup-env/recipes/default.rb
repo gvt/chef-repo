@@ -15,27 +15,26 @@
 
 deploy_to       = "/srv/netpop-reporting"
 reporting_user  = "reporting"
-reporting_group = "apps"
+reporting_group = "admin" # for now, use the pre-existing group "admin" which also grants sudo access
 user_ssh_dir    = "/home/#{reporting_user}/.ssh"
 
-bash "create group for apps" do
-  code "addgroup #{reporting_group}"
-  only_if "test 0 -eq `grep -c #{reporting_group} /etc/group`" # only_if does NOT exist
-end
-
+##
+# create user account for reporting
 bash "create user account for reporting" do
-  code "adduser --ingroup apps #{reporting_user}"
+  code "adduser --ingroup #{reporting_group} #{reporting_user}"
   only_if "test 0 -eq `grep -c #{reporting_user} /etc/passwd`" # only_if does NOT exist
 end
 
+##
+# create deploy_to location on file system
 directory deploy_to do
   action    :create
   recursive true
   owner     reporting_user
-  group     reporting_group
   mode      "775" # When specifying the mode, the value can be a quoted string, eg "644". For a numeric value, it should be 5 digits, eg "00644" to ensure that Ruby can parse it correctly
 end
 
+##
 # creates user's SSH dir at ~/.ssh
 directory user_ssh_dir do
   action    :create
@@ -49,7 +48,7 @@ cookbook_file "#{user_ssh_dir}/id_rsa" do
   source    "id_rsa"
   action    :create
   owner     reporting_user
-  mode      "700" # must be highly restricted perms or SSH agent will not use it
+  mode      "600" # must be highly restricted perms or SSH agent will not use it
   not_if    "test -f /home/#{reporting_user}/.ssh/id_rsa" # not_if file exists
 end
 
@@ -59,4 +58,4 @@ gem_package 'rails' do
   version "2.3.4"
 end
 
-include_recipe "monit"
+include_recipe "monit" # needed?
