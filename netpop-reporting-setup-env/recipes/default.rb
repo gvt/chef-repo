@@ -16,7 +16,9 @@
 deploy_to       = "/srv/netpop-reporting"
 reporting_user  = "reporting"
 reporting_group = "admin" # for now, use the pre-existing group "admin" which also grants sudo access
-user_ssh_dir    = "/home/#{reporting_user}/.ssh"
+user_home_dir   = "/home/#{reporting_user}"
+user_ssh_dir    = "#{user_home_dir}/.ssh"
+user_heroku     = "#{user_home_dir}/.heroku"
 
 ##
 # create user account for reporting
@@ -61,6 +63,8 @@ cookbook_file "#{user_ssh_dir}/authorized_keys" do
   mode      "600" # must be highly restricted perms or SSH agent will not use it
 end
 
+##
+# add to gem sources so that gems can be downloaded without not found errors
 bash "update gem sources" do
   code "gem sources -a http://gemcutter.org"
   code "gem sources -a http://gems.github.com"
@@ -76,4 +80,20 @@ end
 gem_package 'pg'
 gem_package 'semanticart-is_paranoid' # for some reason the rake gems:install task tries to install "is_paranoid" rather than "semanticart-is_paranoid" which fails. this is different behavior than on Mac.
 
-include_recipe "monit" # needed?
+##
+# creates reporting user's heroku dir at ~/.heroku
+directory user_heroku do
+  action    :create
+  recursive true
+  owner     reporting_user
+  mode      "755" # readable by others
+end
+
+##
+# put file ~/.heroku/credentials for heroku gem to access to avoid prompt
+cookbook_file "#{user_heroku}/credentials" do
+  source    "heroku-credentials"
+  action    :create
+  owner     reporting_user
+  mode      "755" # readable by others
+end
