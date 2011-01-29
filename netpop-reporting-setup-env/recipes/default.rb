@@ -66,5 +66,6 @@ gem_package 'rails' do
   action :install
   version "2.3.4"
 end
+gem_package 'pg'
 
 include_recipe "monit" # needed?
