@@ -61,11 +61,19 @@ cookbook_file "#{user_ssh_dir}/authorized_keys" do
   mode      "600" # must be highly restricted perms or SSH agent will not use it
 end
 
+bash "update gem sources" do
+  code "gem sources -a http://gemcutter.org"
+  code "gem sources -a http://gems.github.com"
+end
+
+##
+# these gems are needed to get rake to run for the app
 gem_package 'rake'
 gem_package 'rails' do
   action :install
   version "2.3.4"
 end
 gem_package 'pg'
+gem_package 'semanticart-is_paranoid' # for some reason the rake gems:install task tries to install "is_paranoid" rather than "semanticart-is_paranoid" which fails. this is different behavior than on Mac.
 
 include_recipe "monit" # needed?
