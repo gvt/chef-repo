@@ -14,20 +14,22 @@
 # node.netpop_reporting.[...] set in ../attributes/default.rb
 ##
 
-user_home_dir   = "/home/#{node.netpop_reporting.user}"
+reporting_user  = node.netpop_reporting.user
+reporting_group = node.netpop_reporting.group
+user_home_dir   = "/home/#{reporting_user}"
 user_ssh_dir    = "#{user_home_dir}/.ssh"
 user_heroku     = "#{user_home_dir}/.heroku"
 
 ##
 # create user account for reporting
 bash "create user account for reporting" do
-  code "adduser --ingroup #{node.netpop_reporting.group} #{node.netpop_reporting.user}"
-  only_if "test 0 -eq `grep -c #{node.netpop_reporting.user} /etc/passwd`" # only_if does NOT exist
+  code "adduser --ingroup #{reporting_group} #{reporting_user}"
+  only_if "test 0 -eq `grep -c #{reporting_user} /etc/passwd`" # only_if does NOT exist
 end
 
 ##
-# create deploy_to location on file system
-directory deploy_to do
+# create and set perms for containing dir of deploy location on file system
+directory node.netpop_reporting.deploy_path do
   action    :create
   recursive true
   owner     reporting_user
