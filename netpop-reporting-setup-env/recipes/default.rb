@@ -11,18 +11,18 @@
 # what it does:
 #   1) set directory permissions to allow for capistrano deployment
 #   2) install server software needed by the app (just monit for now)
-# default.netpop_reporting.[...] set in ../attributes/default.rb
+# node.netpop_reporting.[...] set in ../attributes/default.rb
 ##
 
-user_home_dir   = "/home/#{default.netpop_reporting.user}"
+user_home_dir   = "/home/#{node.netpop_reporting.user}"
 user_ssh_dir    = "#{user_home_dir}/.ssh"
 user_heroku     = "#{user_home_dir}/.heroku"
 
 ##
 # create user account for reporting
 bash "create user account for reporting" do
-  code "adduser --ingroup #{default.netpop_reporting.group} #{default.netpop_reporting.user}"
-  only_if "test 0 -eq `grep -c #{default.netpop_reporting.user} /etc/passwd`" # only_if does NOT exist
+  code "adduser --ingroup #{node.netpop_reporting.group} #{node.netpop_reporting.user}"
+  only_if "test 0 -eq `grep -c #{node.netpop_reporting.user} /etc/passwd`" # only_if does NOT exist
 end
 
 ##
@@ -49,7 +49,7 @@ cookbook_file "#{user_ssh_dir}/id_rsa" do
   action    :create
   owner     reporting_user
   mode      "600" # must be highly restricted perms or SSH agent will not use it
-  not_if    "test -f /home/#{default.netpop_reporting.user}/.ssh/id_rsa" # not_if file exists
+  not_if    "test -f /home/#{node.netpop_reporting.user}/.ssh/id_rsa" # not_if file exists
 end
 
 ##
