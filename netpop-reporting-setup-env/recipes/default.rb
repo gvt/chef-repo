@@ -13,18 +13,15 @@
 #   2) install server software needed by the app (just monit for now)
 ##
 
-deploy_to       = "/srv/netpop-reporting"
-reporting_user  = "reporting"
-reporting_group = "admin" # for now, use the pre-existing group "admin" which also grants sudo access
-user_home_dir   = "/home/#{reporting_user}"
+user_home_dir   = "/home/#{default[:'netpop-reporting-setup-env'][:user]}"
 user_ssh_dir    = "#{user_home_dir}/.ssh"
 user_heroku     = "#{user_home_dir}/.heroku"
 
 ##
 # create user account for reporting
 bash "create user account for reporting" do
-  code "adduser --ingroup #{reporting_group} #{reporting_user}"
-  only_if "test 0 -eq `grep -c #{reporting_user} /etc/passwd`" # only_if does NOT exist
+  code "adduser --ingroup #{default[:'netpop-reporting-setup-env'][:group} #{default[:'netpop-reporting-setup-env'][:user]}"
+  only_if "test 0 -eq `grep -c #{default[:'netpop-reporting-setup-env'][:user]} /etc/passwd`" # only_if does NOT exist
 end
 
 ##
@@ -51,7 +48,7 @@ cookbook_file "#{user_ssh_dir}/id_rsa" do
   action    :create
   owner     reporting_user
   mode      "600" # must be highly restricted perms or SSH agent will not use it
-  not_if    "test -f /home/#{reporting_user}/.ssh/id_rsa" # not_if file exists
+  not_if    "test -f /home/#{default[:'netpop-reporting-setup-env'][:user]}/.ssh/id_rsa" # not_if file exists
 end
 
 ##
@@ -104,4 +101,11 @@ postgresql_user reporting_user do
   privileges :superuser => false, :createdb => true, :inherit => true, :login => true
 end
 
-# TODO: the reporting app will need to run under the reporting user account to get access to logs, heroku creds, etc
+##
+# put file /etc/init.d/#{init_filename} for heroku gem to access to avoid prompt
+cookbook_file "/etc/init.d/netpop-reporting.sh" do
+  source    "init.netpop-reporting.sh"
+  action    :create
+  owner     "root" # same as other scripts in this location
+  mode      "755"  # same as other scripts in this location
+end
