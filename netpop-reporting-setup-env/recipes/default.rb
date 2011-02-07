@@ -20,7 +20,7 @@ user_heroku     = "#{user_home_dir}/.heroku"
 ##
 # create user account for reporting
 bash "create user account for reporting" do
-  code "adduser --ingroup #{default[:'netpop-reporting-setup-env'][:group} #{default[:'netpop-reporting-setup-env'][:user]}"
+  code "adduser --ingroup #{default[:'netpop-reporting-setup-env'][:group]} #{default[:'netpop-reporting-setup-env'][:user]}"
   only_if "test 0 -eq `grep -c #{default[:'netpop-reporting-setup-env'][:user]} /etc/passwd`" # only_if does NOT exist
 end
 
