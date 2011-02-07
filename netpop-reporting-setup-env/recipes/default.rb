@@ -107,8 +107,15 @@ end
 ##
 # put file /etc/init.d/#{init_filename} for heroku gem to access to avoid prompt
 cookbook_file "/etc/init.d/netpop-reporting" do
-  source    "init.netpop-reporting.sh"
+  source    "init.netpop-reporting"
   action    :create
   owner     "root" # same as other scripts in this location
   mode      "755"  # same as other scripts in this location
 end
+
+##
+# configure netpop reporting to start upon instance start
+# start ONLY, not stop.
+# bash "configure netpop reporting to start upon instance start" do
+#   code "update-rc.d netpop-reporting start"
+# end
