@@ -106,7 +106,7 @@ end
 
 ##
 # put file /etc/init.d/#{init_filename} for heroku gem to access to avoid prompt
-cookbook_file "/etc/init.d/netpop-reporting.sh" do
+cookbook_file "/etc/init.d/netpop-reporting" do
   source    "init.netpop-reporting.sh"
   action    :create
   owner     "root" # same as other scripts in this location
