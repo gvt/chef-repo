@@ -114,8 +114,7 @@ cookbook_file "/etc/init.d/netpop-reporting" do
 end
 
 ##
-# configure netpop reporting to start upon instance start
-# start ONLY, not stop.
-# bash "configure netpop reporting to start upon instance start" do
-#   code "update-rc.d netpop-reporting start"
-# end
+# configure netpop reporting to start upon instance start (stop expected to be harmless or no-op)
+bash "configure netpop reporting to start upon instance start" do
+  code "sudo update-rc.d netpop-reporting defaults 98 02"
+end
