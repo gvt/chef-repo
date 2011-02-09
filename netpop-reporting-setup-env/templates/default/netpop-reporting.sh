@@ -12,6 +12,7 @@ APP_DIR=/srv/netpop-reporting/current
 APP_ENV=reporting
 
 RAILS_ENV=$APP_ENV $APP_DIR/script/runner 'ReportServer.startup_event!'
+date > $APP_DIR/tmp/last-import
+
 start-stop-daemon --start --exec /usr/bin/rake jobs:work 2>&1 --chdir /srv/netpop-reporting/current --chuid reporting --make-pidfile --pidfile /srv/netpop-reporting/current/tmp/pids/netpop-reporting-dj.pid --background -- RAILS_ENV=reporting
 
-date > /home/reporting/netpop-reporting.last-import.txt

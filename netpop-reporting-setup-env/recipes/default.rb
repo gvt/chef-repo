@@ -99,11 +99,10 @@ cookbook_file "#{user_heroku}/credentials" do
 end
 
 ##
-# create database account for reporting_user, for delayed_job tasks which run as reporting user
-postgresql_user reporting_user do
+# create database account for root, for startup event tasks
+postgresql_user "root" do
   action     :create
-  password   "c0rtland"
-  privileges :superuser => false, :createdb => true, :inherit => true, :login => true
+  privileges :superuser => true, :createdb => true, :inherit => true, :login => true
 end
 
 ##
