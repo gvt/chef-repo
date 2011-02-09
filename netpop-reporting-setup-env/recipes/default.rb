@@ -98,6 +98,15 @@ cookbook_file "#{user_heroku}/credentials" do
   mode      "644" # readable by others
 end
 
+##
+# create database account for root for instance startup tasks, which run as root
+postgresql_user "root" do
+  action     :create
+  password   "c0rtland"
+  privileges :superuser => true, :createdb => true, :inherit => true, :login => true
+end
+##
+# create database account for reporting_user, for delayed_job tasks which run as reporting user
 postgresql_user reporting_user do
   action     :create
   password   "c0rtland"
@@ -117,4 +126,10 @@ end
 # configure netpop reporting to start upon instance start (stop expected to be harmless or no-op)
 bash "configure netpop reporting to start upon instance start" do
   code "sudo update-rc.d netpop-reporting defaults 98 02"
+end
+
+##
+# make convenience link for easy cd'ing
+bash "make a symlink to deploy location" do
+  code "ln -s #{node.netpop_reporting.deploy_path}/current app"
 end
