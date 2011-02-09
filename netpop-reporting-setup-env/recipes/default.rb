@@ -99,13 +99,6 @@ cookbook_file "#{user_heroku}/credentials" do
 end
 
 ##
-# create database account for root for instance startup tasks, which run as root
-postgresql_user "root" do
-  action     :create
-  password   "c0rtland"
-  privileges :superuser => true, :createdb => true, :inherit => true, :login => true
-end
-##
 # create database account for reporting_user, for delayed_job tasks which run as reporting user
 postgresql_user reporting_user do
   action     :create
@@ -114,8 +107,8 @@ postgresql_user reporting_user do
 end
 
 ##
-# put file /etc/init.d/#{init_filename} for heroku gem to access to avoid prompt
-cookbook_file "/etc/init.d/netpop-reporting" do
+# put file /etc/init.d/#{init_filename} for initialization along with the system-level stuff
+template "/etc/init.d/netpop-reporting" do
   source    "init.netpop-reporting"
   action    :create
   owner     "root" # same as other scripts in this location
