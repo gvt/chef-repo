@@ -107,8 +107,8 @@ postgresql_user reporting_user do
 end
 
 ##
-# put file /home/<reporting_user>/script with sticky bit set, to be called by the init.d script
-template "#{user_home_dir}" do
+# put file /home/<reporting_user>/netpop-reporting.sh, to be called by cron upon the reboot event
+template "#{user_home_dir}/netpop-reporting.sh" do
   source    "netpop-reporting.sh"
   action    :create
   owner     reporting_user
