@@ -29,6 +29,7 @@ end
 
 ##
 # create and set perms for containing dir of deploy location on file system
+# something like "/srv/netpop-reporting" which will contain the standard capistrano folders: current, shared releases
 directory node.netpop_reporting.deploy_path do
   action    :create
   recursive true
@@ -107,7 +108,7 @@ end
 
 ##
 # put file /home/<reporting_user>/netpop-reporting.sh, to be called by cron upon the reboot event
-template "#{user_home_dir}/netpop-reporting.sh" do
+template "#{node.netpop_reporting.deploy_path}/netpop-reporting.sh" do
   source    "netpop-reporting.sh"
   action    :create
   owner     reporting_user
