@@ -24,7 +24,7 @@
 
 do_start() {
   log_action_begin_msg "Netpop reporting services"
-  /home/reporting/netpop-reporting.sh
+  <%= reporting_user %>/netpop-reporting.sh
   RETURN = $?
   log_action_begin_msg $RETURN
   exit $RETURN
