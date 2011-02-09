@@ -10,7 +10,7 @@
 ##
 # what it does:
 #   1) set directory permissions to allow for capistrano deployment
-#   2) install server software needed by the app (just monit for now)
+#   2) install server software needed by the app
 # node.netpop_reporting.[...] set in ../attributes/default.rb
 ##
 
@@ -79,7 +79,12 @@ gem_package 'rails' do
   version "2.3.4"
 end
 gem_package 'pg'
-gem_package 'semanticart-is_paranoid' # for some reason the rake gems:install task tries to install "is_paranoid" rather than "semanticart-is_paranoid" which fails. this is different behavior than on Mac.
+# this appears to fail, but upon re-run of chef-client it will have been installed continue past it
+gem_package 'semanticart-is_paranoid'
+
+bash "symlink to irb" do
+  code "ln -sf /usr/bin/irb1.8 /usr/bin/irb"
+end
 
 ##
 # creates reporting user's heroku dir at ~/.heroku
@@ -100,9 +105,17 @@ cookbook_file "#{user_heroku}/credentials" do
 end
 
 ##
-# create database account for root, for startup event tasks
+# create database account for root, for startup event tasks (run by cron)
 postgresql_user "root" do
   action     :create
+  privileges :superuser => true, :createdb => true, :inherit => true, :login => true
+end
+
+##
+# create database account for reporting_user, for application-specific tasks (run by app code)
+postgresql_user reporting_user do
+  action     :create
+  password   "c0rtland"
   privileges :superuser => true, :createdb => true, :inherit => true, :login => true
 end
 
@@ -118,6 +131,6 @@ end
 ##
 # make convenience link for easy cd'ing
 bash "make a symlink to deploy location" do
-  code "ln -s #{node.netpop_reporting.deploy_path}/current #{user_home_dir}/reporting" # one for reporting user
-  code "ln -s #{node.netpop_reporting.deploy_path}/current     /home/ubuntu/reporting" # one for ubuntu    user
+  code "ln -sf #{node.netpop_reporting.deploy_path}/current #{user_home_dir}/reporting" # one for reporting user
+  code "ln -sf #{node.netpop_reporting.deploy_path}/current     /home/ubuntu/reporting" # one for ubuntu    user
 end

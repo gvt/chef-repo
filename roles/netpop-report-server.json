@@ -28,7 +28,6 @@
     "recipe[postgresql::server]",
     "recipe[postgresql::client]", // need this installed to comile against its libs by "application" recipe
     "recipe[cron::default]",
-    "recipe[monit::default]",
     "recipe[netpop-reporting-setup-env::default]",
     "recipe[capistrano::default]"
   ],
