@@ -118,5 +118,6 @@ end
 ##
 # make convenience link for easy cd'ing
 bash "make a symlink to deploy location" do
-  code "ln -s #{node.netpop_reporting.deploy_path}/current app"
+  code "ln -s #{node.netpop_reporting.deploy_path}/current #{user_home_dir}/reporting" # one for reporting user
+  code "ln -s #{node.netpop_reporting.deploy_path}/current     /home/ubuntu/reporting" # one for ubuntu    user
 end
