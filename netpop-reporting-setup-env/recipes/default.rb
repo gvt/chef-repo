@@ -107,27 +107,12 @@ postgresql_user reporting_user do
 end
 
 ##
-# put file /etc/init.d/#{init_filename} for initialization along with the system-level stuff
-template "/etc/init.d/netpop-reporting" do
-  source    "netpop-reporting"
-  action    :create
-  owner     "root" # same as other scripts in this location
-  mode      "755"  # same as other scripts in this location
-end
-
-##
 # put file /home/<reporting_user>/script with sticky bit set, to be called by the init.d script
 template "#{user_home_dir}" do
   source    "netpop-reporting.sh"
   action    :create
   owner     reporting_user
-  mode      "6755" # sticky bit, so that anyone who runs it runs it as reporting_user
-end
-
-##
-# configure netpop reporting to start upon instance start (stop expected to be harmless or no-op)
-bash "configure netpop reporting to start upon instance start" do
-  code "sudo update-rc.d netpop-reporting defaults 98 02"
+  mode      "754" # user:all privs -- group:read,execute -- other:read only
 end
 
 ##
