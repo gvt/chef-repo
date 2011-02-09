@@ -112,7 +112,7 @@ template "#{user_home_dir}" do
   source    "netpop-reporting.sh"
   action    :create
   owner     reporting_user
-  mode      "754" # user:all privs -- group:read,execute -- other:read only
+  mode      "754" # user: all privs -- group: read, execute -- other: read only
 end
 
 ##
